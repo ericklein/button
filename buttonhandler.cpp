@@ -1,4 +1,3 @@
-
 /*
   Project Name: buttonHandler.h
   Developer:  Eric Klein Jr. (temp2@ericklein.com)
@@ -14,14 +13,13 @@ ButtonHandler::ButtonHandler(int p)
 }
 
 void ButtonHandler::init() {
-  pinMode(pin, INPUT_PULLUP);
   was_pressed = false;
   pressed_counter = 0;
 }
 
 int ButtonHandler::handle(){
   int event;
-  int now_pressed = !digitalRead(pin);
+  int now_pressed = digitalRead(pin);
 
   if (!now_pressed && was_pressed) {
     // handle release event
