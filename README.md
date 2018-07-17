@@ -20,5 +20,10 @@ Revisions
   07/08/18
     - critical bug fix; library was previously broken
     - button schematic image added
+  07/16/18
+    - debug information added
+    - # of loops needed to distinguish short from long press passed into class
 
 Feature Requests
+  07/16/18
+    - can I inherit a conditional compile from the compiling project to toggle the debug code?

@@ -7,24 +7,31 @@
 #include "Arduino.h"
 #include "buttonhandler.h"
 
-ButtonHandler::ButtonHandler(int p)
-  : pin(p)
+ButtonHandler::ButtonHandler(int p, int b)
+  : pin(p), buttonDelay(b)
 {
 }
 
 void ButtonHandler::init() {
-  was_pressed = false;
-  pressed_counter = 0;
+  _buttonWasPressed = false;
+  _buttonPressCounter = 0;
 }
 
 int ButtonHandler::handle(){
   int event;
-  int now_pressed = digitalRead(pin);
+  int buttonNowPressed = digitalRead(pin);
 
-  if (!now_pressed && was_pressed) {
+  if (!buttonNowPressed && _buttonWasPressed) {
+    // Debug code
+    // Serial.print("button pin ");
+    // Serial.print(pin);
+    // Serial.print(" loop count is ");
+    // Serial.println(_buttonPressCounter);
     // handle release event
-    if (pressed_counter < 25)  //long press duration expressed in loop iterations
-      event = 1;
+    if (_buttonPressCounter < buttonDelay)  //long press duration expressed in loop iterations
+      {
+        event = 1;
+      }
     else
       event = 2;
   }
@@ -32,13 +39,12 @@ int ButtonHandler::handle(){
     event = 0;
 
   // update press running duration
-  if (now_pressed)
-    ++pressed_counter;
+  if (buttonNowPressed)
+    ++_buttonPressCounter;
   else
-    pressed_counter = 0;
+    _buttonPressCounter = 0;
 
   // remember state, and we're done
-  was_pressed = now_pressed;
-  delay(20); // button debounce delay expressed in ms
+  _buttonWasPressed = buttonNowPressed;
   return event;
 }
