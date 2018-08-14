@@ -10,14 +10,14 @@
 #include "buttonhandler.h"
 
 // Assign Arduino pins
-#define pushButtonOne 12
-#define pushButtonTwo 11
+#define pushButtonOne 8
+#define pushButtonTwo 9
 
 enum { BTN_NOPRESS = 0, BTN_SHORTPRESS, BTN_LONGPRESS };
 
 // instantiate button object
-ButtonHandler buttonOne(pushButtonOne);
-ButtonHandler buttonTwo(pushButtonTwo);
+ButtonHandler buttonOne(pushButtonOne, 20000);
+ButtonHandler buttonTwo(pushButtonTwo, 20000 );
 
 void setup() {
   Serial.begin(115200);
@@ -37,7 +37,7 @@ switch (buttonOne.handle()) {
     Serial.println("buttonOne long press"); //debug text
     break;
   }
-  switch (buttonTwo.handle()) {
+  switch (buttonTwo.handle()) { 
   case BTN_SHORTPRESS:
     Serial.println("buttonTwo short press"); //debug text
     break;

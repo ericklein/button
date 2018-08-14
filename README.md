@@ -23,6 +23,8 @@ Revisions
   07/16/18
     - debug information added
     - # of loops needed to distinguish short from long press passed into class
+  08/01/18
+    - update example file
 
 Feature Requests
   07/16/18
