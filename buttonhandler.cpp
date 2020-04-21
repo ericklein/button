@@ -1,13 +1,14 @@
 /*
-  Project Name: buttonHandler.h
+  Project Name: buttonHandler
   Developer:  Eric Klein Jr. (temp2@ericklein.com)
-  Description:  Library for detection of short and long presses for simple buttons
+
+  See README.md for target information, revision history, feature requests, etc.
 */
 
 #include "Arduino.h"
 #include "buttonhandler.h"
 
-ButtonHandler::ButtonHandler(int p, int b)
+ButtonHandler::ButtonHandler(int p, long b)
   : pin(p), buttonDelay(b)
 {
 }
@@ -15,6 +16,8 @@ ButtonHandler::ButtonHandler(int p, int b)
 void ButtonHandler::init() {
   _buttonWasPressed = false;
   _buttonPressCounter = 0;
+  pinMode(pin, INPUT_PULLUP);
+
 }
 
 int ButtonHandler::handle(){

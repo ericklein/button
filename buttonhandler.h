@@ -1,7 +1,8 @@
 /*
-  Project Name: buttonHandler.h
+  Project Name: buttonHandler
   Developer:  Eric Klein Jr. (temp2@ericklein.com)
-  Description:  Library for detection of short and long presses for simple buttons
+
+  See README.md for target information, revision history, feature requests, etc.
 */
 
 #ifndef buttonHandler_h
@@ -11,15 +12,15 @@
 
 class ButtonHandler {
   public:
-    ButtonHandler(int pin, int buttonDelay);
+    ButtonHandler(int pin, long buttonDelay);
     void init();
     int handle();
 
   private:
-    boolean   _buttonWasPressed;    // previous state
-    int       _buttonPressCounter;  // press running duration
-    const int pin;                 // pin to which button is connected
-    const  int buttonDelay;         // number of execution loops to distinguish short v. long press
+    boolean     _buttonWasPressed;    // previous state
+    long        _buttonPressCounter;  // press running duration
+    const int   pin;                 // pin to which button is connected
+    const long  buttonDelay;         // number of execution loops to distinguish short v. long press
 };
 
 #endif
