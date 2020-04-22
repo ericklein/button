@@ -4,34 +4,29 @@ Library for to handle short and long press of buttons
 
 ### Contributors
 
-
 ### Software Dependencies
+  - none
 
 ### BOM
-  - simple button
+  - 2 pin button
+  - 2 wires
 
 ### Pinouts
-  - Assumes 10K resistor inline before ground, no use of Arduino board pullup (see diagram)
-
+  - one button pin to board ground
+  - one button pin to board digital pin with INPUT_PULLUP for resistance
 
 ### Information Sources
   - https://www.teachmemicro.com/create-arduino-library/
 
-### Issues
-
 ### Questions
-  - 04/21/20 - Do Adafruit ARM boards have pin pullup?
+  - 04/21/20 - Do all (Adafruit) ARM boards have pin pullup? If not, use resistor, remove pinMode from .cpp, flip digitalRead values back
 
 ### Learnings
   - 04/21/20 - Agree that button within rotary encoder should be handled by this library, not embedded button handler in rotaryencoder library. Not all rotary encoders have a button embedded, this creates duplicate code.
 
 ### Feature Requests
   - 05/14/19
-    - error handling; can we determine if the button is initialized/reading properly
     - add library.properties; see Information Sources for howto
-  - 06/02/19
-    - code is completely timing dependent?! I have to tweak the short press/long press differentiator on every MCU
-    - error handling; bad parameters
  
 ### Revisions
   - 10/17/14
@@ -53,8 +48,13 @@ Library for to handle short and long press of buttons
   - 08/01/18
     - update example file
   - 06/02/19
-    [FR 07/16/18] can I inherit a conditional compile from the compiling project to toggle the debug code?
-      - NO, macros don't pass between project files
+      [FR 07/16/18] can I inherit a conditional compile from the compiling project to toggle the debug code? -> NO, macros don't pass between project files
   - 04/21/20
-      [FR 05/14/19] the library subdirectory and code directory do not have same file modification dates? -> github source only deployed to /libraries
-      - aligned variable types between .h and .cpp
+    - significant code refactoring
+    [FR 05/14/19] the library subdirectory and code directory do not have same file modification dates? -> github source only deployed to /libraries
+    - aligned variable types between .h and .cpp
+    - example code highlights what button (pin) is sending feedback
+    - conditional debug code in .cpp
+    [FR 05/14/19] error handling; can we determine if the button is initialized/reading properly -> CLOSED
+    [FR 06/02/19] error handling for bad parameters -> checking for out of range buttonLongPressDelay
+    [FR 06/02/19] code is completely timing dependent?! I have to tweak the short press/long press differentiator on every MCU -> moved to millis() time difference for button press duration

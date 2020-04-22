@@ -2,8 +2,6 @@
   Project Name:   buttonExample
   Developer:      Eric Klein Jr. (temp2@ericklein.com)
   Description:    example code for buttonhandler library
-  
-  See README.md for target information, revision history, feature requests, etc.
 */
 
 // Library initialization
@@ -13,36 +11,53 @@
 #define pushButtonOne 8
 #define pushButtonTwo 9
 
-enum { BTN_NOPRESS = 0, BTN_SHORTPRESS, BTN_LONGPRESS };
+#define buttonLongPressDelay 3000
 
-// instantiate button object
-ButtonHandler buttonOne(pushButtonOne, 20000);
-ButtonHandler buttonTwo(pushButtonTwo, 20000 );
+enum { notPressed = 0, shortPress, longPress };
 
-void setup() {
+// instantiate buttons
+ButtonHandler buttonOne(pushButtonOne, buttonLongPressDelay);
+ButtonHandler buttonTwo(pushButtonTwo, buttonLongPressDelay);
+
+void setup()
+{
   Serial.begin(115200);
-  Serial.println("Button example started");
-  // Setup push buttons
+  while (!Serial) ;
+
+  Serial.print("Button example started, long press delay is ");
+  Serial.print(buttonLongPressDelay);
+  Serial.println(" ms");
+  // Setup buttons
   buttonOne.init();
   buttonTwo.init();
 }
 
 void loop()
 {
-switch (buttonOne.handle()) {
-  case BTN_SHORTPRESS:
-    Serial.println("buttonOne short press"); //debug text
-    break;
-  case BTN_LONGPRESS:
-    Serial.println("buttonOne long press"); //debug text
-    break;
+  switch (buttonOne.handle())
+  {
+    case shortPress:
+      Serial.print("Button on pin ");
+      Serial.print(pushButtonOne);
+      Serial.println(" short press");
+      break;
+    case longPress:
+      Serial.print("Button on pin ");
+      Serial.print(pushButtonOne);
+      Serial.println(" long press");
+      break;
   }
-  switch (buttonTwo.handle()) { 
-  case BTN_SHORTPRESS:
-    Serial.println("buttonTwo short press"); //debug text
-    break;
-  case BTN_LONGPRESS:
-    Serial.println("buttonTwo long press"); //debug text
-    break;
+  switch (buttonTwo.handle()) 
+  { 
+    case shortPress:
+      Serial.print("Button on pin ");
+      Serial.print(pushButtonTwo);
+      Serial.println(" short press");
+      break;
+    case longPress:
+      Serial.print("Button on pin ");
+      Serial.print(pushButtonTwo);
+      Serial.println(" long press");
+      break;
   }
 }

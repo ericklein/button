@@ -10,17 +10,17 @@
 
 #include "Arduino.h"
 
-class ButtonHandler {
+class ButtonHandler
+{
   public:
-    ButtonHandler(int pin, long buttonDelay);
+    ButtonHandler(int pin, long buttonLongPressDelay);
     void init();
     int handle();
 
   private:
-    boolean     _buttonWasPressed;    // previous state
-    long        _buttonPressCounter;  // press running duration
-    const int   pin;                 // pin to which button is connected
-    const long  buttonDelay;         // number of execution loops to distinguish short v. long press
+    bool            buttonWasPressed;
+    unsigned long   buttonPressStartTime;  
+    const int       pin;
+    long            buttonLongPressDelay;
 };
-
 #endif
