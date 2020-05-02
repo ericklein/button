@@ -8,12 +8,12 @@
 #include "buttonhandler.h"
 
 // Assign Arduino pins
-#define pushButtonOne 8
+#define pushButtonOne 12
 #define pushButtonTwo 9
 
 #define buttonLongPressDelay 3000
 
-enum { notPressed = 0, shortPress, longPress };
+enum { shortPress = 0, longPress };
 
 // instantiate buttons
 ButtonHandler buttonOne(pushButtonOne, buttonLongPressDelay);

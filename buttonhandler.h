@@ -10,6 +10,8 @@
 
 #include "Arduino.h"
 
+//#define DEBUG
+
 class ButtonHandler
 {
   public:

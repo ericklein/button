@@ -8,7 +8,7 @@
 #include "Arduino.h"
 #include "buttonhandler.h"
 
-//#define DEBUG
+#define debounceDelay 50
 
 ButtonHandler::ButtonHandler(int p, long b)
   : pin(p), buttonLongPressDelay(b)
@@ -35,7 +35,7 @@ int ButtonHandler::handle()
   // button is pressed as INPUTPULLUP keeps pin high normally
   bool buttonNowPressed = !(digitalRead(pin));
 
-  if (!buttonNowPressed && buttonWasPressed)
+  if (!buttonNowPressed && buttonWasPressed &&  ((millis() - buttonPressStartTime > debounceDelay)))
   // button press has ended, return short or long button event
   {
     #ifdef DEBUG
@@ -52,20 +52,17 @@ int ButtonHandler::handle()
     // return short or long button press event
     if ((millis() - buttonPressStartTime) < buttonLongPressDelay)
     {
-      event = 1; //short press
+      event = 0; //short press
     }
     else
     {
-      event = 2; //long press
+      event = 1; //long press
     }
     buttonPressStartTime = 0;
     #ifdef DEBUG
       Serial.println("Resetting button press start time");
     #endif
   }
-  else
-    // no press or press is still occuring, nothing to act on
-    event = 0;
 
   if (buttonNowPressed && (buttonPressStartTime == 0))
   // start tracking how long the button has been pressed

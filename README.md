@@ -17,16 +17,22 @@ Library for to handle short and long press of buttons
 
 ### Information Sources
   - https://www.teachmemicro.com/create-arduino-library/
+  - https://my.eng.utah.edu/~cs5780/debouncing.pdf
+  - http://www.ganssle.com/debouncing-pt2.htm
 
 ### Questions
   - 04/21/20 - Do all (Adafruit) ARM boards have pin pullup? If not, use resistor, remove pinMode from .cpp, flip digitalRead values back
 
 ### Learnings
   - 04/21/20 - Agree that button within rotary encoder should be handled by this library, not embedded button handler in rotaryencoder library. Not all rotary encoders have a button embedded, this creates duplicate code.
+  - 05/01/20 - Debouncer is helping with noisy Allen Bradley button, but results get better with #DEBUG on? slowing down sample rate? if so, we could implement fix sampling rate to reduce timing dependency?
 
 ### Feature Requests
   - 05/14/19
     - add library.properties; see Information Sources for howto
+  - 05/01/20
+    - Can I refactor code to remove int event and have endpoints handled with a direct return statement?
+    - debounce input
  
 ### Revisions
   - 10/17/14
